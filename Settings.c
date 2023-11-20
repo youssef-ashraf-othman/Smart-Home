@@ -109,6 +109,7 @@ void ChangePassword(u16 *Copy_ResPassword)
 			Password=0;
 			DivisionFactor=1;
 			KeyPressed=KPD_u8_KEY_NOT_PRESSED;
+			LCD_voidClearCursor();
 			LCD_voidClearScreen();
 			LCD_voidu8GoToXY(LCD_u8_LINE1,0);
 			LCD_voidSendString(str4);
