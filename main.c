@@ -107,6 +107,7 @@ int main()
 						DivisionFactor=1;
 						r1=0;
 						L=KPD_u8_KEY_NOT_PRESSED;
+						LCD_voidClearCursor();
 						LCD_voidClearScreen();
 						LCD_voidu8GoToXY(LCD_u8_LINE1,0);
 						LCD_voidSendString(str9);
