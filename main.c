@@ -50,7 +50,7 @@ int main()
 	LCD_voidClearCursor();
 	LCD_voidu8GoToXY(LCD_u8_LINE1,0);
 	LCD_voidSendString(str4);
-	_delay_ms(100);
+	_delay_ms(1000);
 
 	//chosing one mood
 	LCD_voidClearScreen();
