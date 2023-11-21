@@ -11,13 +11,15 @@ int main()
 {
 	DIO_voidInit();
 	LCD_voidInit();
+	//Timer begins 
 	GI_voidEnable();
 	TIMERS_voidTIMER1Init();
 	TIMERS_voidTimer1SetTopValueOVF(49999);
 	Timer1_u8SetCallBack(TIMER1_OVFISR,&Timer);
 	TIMERS_voidTimer1SetPrescalerValue();
+	//----------------------------------------
 	u8 str1[]="Welcome To System";
-    u8 str2[]="Set Your Password";
+   	u8 str2[]="Set Your Password";
 	u8 str3[]="Password : ";
 	u8 str4[]="Password Was Set";
 	u8 str5[]="Welcome to home";
@@ -34,6 +36,7 @@ int main()
 	LCD_voidSendString(str3);
 	u8 r1=1,Counter1=0,L;
 	u16 DivisionFactor=1,ResPassword,Password;
+	//Set system password
 	while(L!='C')
 	{
 		KPD_u8GetKeyState(&L);
@@ -72,7 +75,7 @@ int main()
 
 
 			KPD_u8GetKeyState(&L);
-			if(L==1)
+			if(L==1)//Take Control of your home
 			{
 				//check for password
 				while(1)
@@ -96,12 +99,13 @@ int main()
 						Password=0;
 						DivisionFactor=1;
 						r1=0;
+						//if password is true 
 						Admin(&r1);
 						LCD_voidClearScreen();
 						break;
 
 					}
-					else
+					else //password is wrong try again
 					{
 						Password=0;
 						DivisionFactor=1;
@@ -114,7 +118,7 @@ int main()
 						_delay_ms(1000);
 						Counter1++;
 					}
-					if(Counter1==3)
+					if(Counter1==3) //Too many trys blocks login
 					{
 						LCD_voidClearCursor();
 						LCD_voidClearScreen();
@@ -128,8 +132,8 @@ int main()
 					}
 		        }
 	        }
-			//code for guest
-			else if(L==2)
+			
+			else if(L==2) //code for Settings 
 			{
 				Settings(&r1,&ResPassword);
 				LCD_voidClearScreen();
