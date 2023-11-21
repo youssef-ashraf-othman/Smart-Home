@@ -15,7 +15,7 @@ void Settings(u8 *Copy_r , u16 *Copy_Respassword)
 
 	while(1)
 	{
-		if(Flag==0)
+		if(Flag==0) //To display the screen for one time
 		{
 			LCD_voidClearScreen();
 			LCD_voidu8GoToXY(LCD_u8_LINE1,0);
@@ -73,7 +73,7 @@ void ChangePassword(u16 *Copy_ResPassword)
 			}
 		}
 
-		if(Password==*Copy_ResPassword)
+		if(Password==*Copy_ResPassword)//password is true
 		{
 			KeyPressed=KPD_u8_KEY_NOT_PRESSED;
 			DivisionFactor=1;
@@ -81,7 +81,7 @@ void ChangePassword(u16 *Copy_ResPassword)
 			LCD_voidClearScreen();
 			LCD_voidu8GoToXY(LCD_u8_LINE1,0);
 			LCD_voidSendString(str2);
-			while(KeyPressed!='C')
+			while(KeyPressed!='C')//Entering new password 
 			{
 				KPD_u8GetKeyState(&KeyPressed);
 				if(KeyPressed!=KPD_u8_KEY_NOT_PRESSED)
@@ -104,7 +104,7 @@ void ChangePassword(u16 *Copy_ResPassword)
 
 
 		}
-		else
+		else//Password is wrong try again
 		{
 			Password=0;
 			DivisionFactor=1;
@@ -116,7 +116,7 @@ void ChangePassword(u16 *Copy_ResPassword)
 			_delay_ms(1000);
 			Counter1++;
 		}
-		if(Counter1==3)
+		if(Counter1==3)//too many wrong trys
 		{
 			Counter1=0;
 			LCD_voidClearCursor();
