@@ -22,7 +22,7 @@ void Admin(u8 *Copy_r)
 
 	while(1)
 	{
-		if(Flag1==0)
+		if(Flag1==0)//To display the screen for one time 
 		{
 			LCD_voidClearScreen();
 			LCD_voidu8GoToXY(LCD_u8_LINE1,0);
@@ -49,7 +49,7 @@ void Admin(u8 *Copy_r)
 		{
 			ShowTime();
 		}
-		else if (KeyPressed==4)
+		else if (KeyPressed==4)//will break the loop to go back to main menu
 		{
 
 			*Copy_r=1;
@@ -82,7 +82,7 @@ void ControlLed()
 	while(1)
 	{
 		KPD_u8GetKeyState(&KeyPressed);
-		if(KeyPressed==1)
+		if(KeyPressed==1)//open the main light bulb
 		{
 
 			DIO_u8SetPinValue(DIO_u8_PORTA,DIO_u8_PIN4,DIO_u8_HIGH);
@@ -92,7 +92,7 @@ void ControlLed()
 			flag=1;
 
 		}
-		else if (KeyPressed==2 && flag!=0)
+		else if (KeyPressed==2 && flag!=0)//Light must be opened to change it 
 		{
 			if (flag==1)
 			{
@@ -129,7 +129,7 @@ void ControlLed()
 
 
 		}
-		else if (KeyPressed==3)
+		else if (KeyPressed==3)//close all lights 
 		{
 			DIO_u8SetPinValue(DIO_u8_PORTA,DIO_u8_PIN4,DIO_u8_LOW);
 			DIO_u8SetPinValue(DIO_u8_PORTA,DIO_u8_PIN5,DIO_u8_LOW);
@@ -137,7 +137,7 @@ void ControlLed()
 			DIO_u8SetPinValue(DIO_u8_PORTA,DIO_u8_PIN7,DIO_u8_LOW);
 			flag=0;
 		}
-		else if (KeyPressed==4)
+		else if (KeyPressed==4)//break loop to go back to maim menu
 		{
 			Flag1=0;
 			break;
@@ -161,18 +161,18 @@ void TempAdjust()
 	while (1)
 	{
 		KPD_u8GetKeyState(&KeyPressed);
-		if(KeyPressed==1)
+		if(KeyPressed==1)//Go back to main menu
 		{
 			Flag1=0;
 			break;
 		}
 
-		ADC_u8GetDigitalValueSynchNonBlocking(ADC_u8_CHANNEL_0,&Local_Temp);
+		ADC_u8GetDigitalValueSynchNonBlocking(ADC_u8_CHANNEL_0,&Local_Temp);//convert sensor's reading into degrees 
 		Local_Temp=((Local_Temp*5000UL)/1024)/10;
-		if(Temp2!=Local_Temp)
+		if(Temp2!=Local_Temp)//To display temp once and when it changes 
 		{
 			Temp2=Local_Temp;
-			if(Local_Temp >= 25)
+			if(Local_Temp >= 25) //To open cooler
 
 			{
 
@@ -189,7 +189,7 @@ void TempAdjust()
 
 
 			}
-			else if (Temp2 <= 20)
+			else if (Temp2 <= 20) //to open heater 
 			{
 
 				LCD_voidu8GoToXY(LCD_u8_LINE1,0);
@@ -203,7 +203,7 @@ void TempAdjust()
 				DIO_u8SetPinValue(DIO_u8_PORTD,DIO_u8_PIN3,DIO_u8_LOW);
 
 			}
-			else
+			else //close both
 			{
 
 				LCD_voidu8GoToXY(LCD_u8_LINE1,0);
@@ -245,19 +245,19 @@ void ShowTime()
 			{
 				LCD_voidWriteNumber(0);
 			}
-				LCD_voidWriteNumber(Hr);
-				LCD_voidSendChar(':');
+			LCD_voidWriteNumber(Hr);
+			LCD_voidSendChar(':');
 			if(Min<10)
 			{
 				LCD_voidWriteNumber(0);
 			}
-				LCD_voidWriteNumber(Min);
-				LCD_voidSendChar(':');
+			LCD_voidWriteNumber(Min);
+			LCD_voidSendChar(':');
 			if(Sec<10)
 			{
 				LCD_voidWriteNumber(0);
 			}
-				LCD_voidWriteNumber(Sec);
+			LCD_voidWriteNumber(Sec);
 
 		}while(Counter1==20 || Counter1==0);
 
@@ -269,7 +269,7 @@ void ShowTime()
 
 void Timer()
 {
-	if(Counter1==5)
+	if(Counter1==5) //Timer must interrupt five times to count 1 Sec
 	{
 		Counter1=0;
 		Sec++;
